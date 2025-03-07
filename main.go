@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -25,7 +26,7 @@ type Book struct {
 var collection *mongo.Collection
 
 func connectDB() {
-	clientOptions := options.Client().ApplyURI("mongodb+srv://prateekdubey2663:prateek1234@cluster0.tklpg.mongodb.net/")
+	clientOptions := options.Client().ApplyURI("mongodb+srv://prateekdubey2663:prateek1234@cluster0.tklpg.mongodb.net/").SetTLSConfig(&tls.Config{})
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		log.Fatal(err)
